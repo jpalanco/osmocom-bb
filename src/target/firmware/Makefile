@@ -25,7 +25,7 @@ ENV_e88flash_OBJS=board/compal/start.rom.o board/compal/header.o board/compal/ex
 
 # List of all supported boards (meant to be overridden on command line)
 BOARDS?=compal_e88 compal_e86 compal_e99 se_j100 se_k2xx gta0x gtm900b fcdev3b \
-	pirelli_dpl10 tr800
+	pirelli_dpl10 tr800 tsm30
 
 # Framebuffer support, board specific drivers
 FB_OBJS=fb/framebuffer.o fb/font.o fb/helvR08.o fb/helvB14.o fb/c64.o \
@@ -38,6 +38,7 @@ FB_j100_OBJS=$(FB_OBJS) fb/fb_rgb332.o fb/fb_ssd1963.o
 FB_dpl10_OBJS=$(FB_OBJS) fb/fb_rgb332.o fb/fb_s6b33b1x.o
 FB_k2xx_OBJS=$(FB_OBJS) fb/fb_rgb332.o fb/fb_k2xx.o
 FB_dummy_OBJS=$(FB_OBJS) fb/fb_dummy.o
+FB_tsm30_OBJS=$(FB_OBJS) fb/fb_tsm30_r61505.o
 
 # TI Calypso
 calypso_COMMON_OBJS=board/common/calypso_uart.o \
@@ -116,6 +117,12 @@ BOARD_se_k2xx_OBJS=$(calypso_COMMON_OBJS) board/se_k2xx/init.o \
 	board/common/readcal_tiffs.o battery/dummy.o $(FB_k2xx_OBJS)
 BOARD_se_k2xx_ENVIRONMENTS=highram
 
+# Vitelcom TSM30
+BOARD_tsm30_OBJS=$(calypso_COMMON_OBJS) board/tsm30/init.o \
+	board/tsm30/rffe_tsm30.o board/tsm30/rf_tables.o board/tsm30/hw_version.o \
+	board/common/readcal_tiffs.o battery/dummy.o $(FB_tsm30_OBJS)
+BOARD_tsm30_ENVIRONMENTS=highram
+
 #
 # Applications
 #
@@ -131,7 +138,7 @@ APP_menu_ENVIRONMENTS=* -highram
 # Various objects that are currently linked into all applications
 FLASH_OBJS=flash/cfi_flash.o
 ABB_OBJS=abb/twl3025.o
-RF_OBJS=rf/trf6151.o
+RF_OBJS=rf/trf6151.o rf/lmx2326.o
 
 # Objects that go in all applications
 ANY_APP_OBJS+=$(ABB_OBJS) $(RF_OBJS) $(FLASH_OBJS)

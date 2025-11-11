@@ -1,0 +1,44 @@
+TSM30 Memory Map
+================
+
+External Flash (8MB - Fujitsu MBM29LV800BA)
+--------------------------------------------
+0x00000000 - 0x007FFFFF: External Flash (8MB)
+  0x00000000 - 0x0000FFFF: Loader area (64KB)
+  0x00010000 - 0x007F0000: Application area (~7.9MB)
+  0x02000000 - 0x027FFFFF: TIFFS area (sectors 103-141, ~2.5MB)
+
+Internal SRAM (256KB)
+---------------------
+0x00800000 - 0x0083FFFF: Internal SRAM (256KB)
+  0x00800000 - 0x0080001B: Exception vectors
+  0x0080001C - 0x00800033: Exception handlers
+  0x00800034 - 0x0083FFFF: Code and data
+
+External SRAM (256KB)
+---------------------
+0x01000000 - 0x0103FFFF: External SRAM (256KB)
+
+Memory Mapped Peripherals
+-------------------------
+0x400000 - 0x400001: LCD Controller (R61505)
+  0x400000: Command register
+  0x400001: Data register
+
+0xFFFE4800 - 0xFFFE480F: GPIO registers
+0xFFFFF800 - 0xFFFFFFFF: Watchdog and system registers
+
+TIFFS Layout
+------------
+Base: 0x02000000
+Sector size: 64KB (0x10000)
+Sectors: 103-141 (39 sectors)
+Total TIFFS size: ~2.5MB
+
+Files stored:
+- /gsm/om/params - O&M parameters (256 bytes)
+- /gsm/rf/section - RF section with version header
+- /gsm/rf/afcdac - AFC DAC calibration
+- /gsm/rf/tx/ramps.* - TX ramp profiles
+- /gsm/rf/tx/levels.* - TX power levels
+- /gsm/rf/tx/calchan.* - TX channel calibration

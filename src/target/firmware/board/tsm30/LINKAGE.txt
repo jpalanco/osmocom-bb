@@ -1,0 +1,52 @@
+TSM30 Linkage Information
+=========================
+
+Memory Segments
+---------------
+- FLASH: 0x00010000 - 0x007F0000 (Application code)
+- IRAM:  0x00800000 - 0x0083FFFF (Internal SRAM)
+- ERAM:  0x01000000 - 0x0103FFFF (External SRAM)
+
+Loader Area
+-----------
+- Address: 0x00000000 - 0x0000FFFF
+- Size: 64KB
+- Purpose: Bootloader and initial startup code
+
+Application Area
+----------------
+- Address: 0x00010000 - 0x007F0000
+- Size: ~7.9MB
+- Contains: Main application code, read-only data, constructors
+
+Exception Vectors
+-----------------
+- Address: 0x0080001C - 0x00800033
+- Size: 24 bytes
+- Purpose: ARM exception handlers (reset, IRQ, FIQ, etc.)
+
+RAM Usage
+---------
+Internal SRAM (IRAM):
+- .data: Initialized data
+- .bss: Uninitialized data
+- .ramtext: RAM-resident code
+- Stack and heap
+
+External SRAM (ERAM):
+- Additional data storage
+- Large buffers
+- Framebuffer memory
+
+Peripheral Mapping
+------------------
+- LCD: 0x400000 - 0x400001 (CS3)
+- GPIO: 0xFFFE4800 - 0xFFFE480F
+- System: 0xFFFFF800 - 0xFFFFFFFF
+
+Build Configuration
+-------------------
+- CROSS_COMPILE: arm-none-eabi-
+- BOARD: tsm30
+- ENVIRONMENTS: highram
+- LINKER_SCRIPT: flash.lds

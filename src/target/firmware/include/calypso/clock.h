@@ -7,6 +7,7 @@
 #define CALYPSO_PLL26_86_7_MHZ	((10 << 8) | 2)
 #define CALYPSO_PLL26_87_MHZ	((3 << 8) | 0)
 #define CALYPSO_PLL13_104_MHZ	((8 << 8) | 0)
+#define CALYPSO_PLL13_13_MHZ	((6 << 8) | 0)  /* 13MHz: PLL_MULT=6, DIV=0, ARM_DIV=6 */
 
 enum mclk_div {
 	_ARM_MCLK_DIV_1		= 0,
